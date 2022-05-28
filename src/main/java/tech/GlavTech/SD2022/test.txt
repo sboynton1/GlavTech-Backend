@@ -1,0 +1,14 @@
+{
+"email": "sam@gmail.com",
+"imageUrl": "https:yourmom.com",
+"jobTitle": "Dev",
+"name": "Samuel Boynton",
+"phone": "3176004064"
+}
+{
+"email": "dayne@gmail.com",
+"imageUrl": "https:yourmom2222.com",
+"jobTitle": "Frontend Dev",
+"name": "Dayne Waldal",
+"phone": "3176222064"
+}
