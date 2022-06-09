@@ -34,9 +34,7 @@ public class RegistrationService {
             if(possibleDupes.isPresent()) return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate Email");
             String checker = pTester.passwordStrengthTest(userReg.getPassword());
             if (!checker.equals("Passed")) return ResponseEntity.status(HttpStatus.CONFLICT).body(checker);
-            System.out.println(userReg.getUsername());
-            Optional<User> possibleDupedUsernames;
-            userRepository.findUserByUsername(userReg.getUsername());
+            userRepository.findUserByUsername(userReg.getUsername()).orElseThrow(() -> new UserNotFoundException(String.format("")));
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate Username");
         } catch(UserNotFoundException e) {
             if (eTester.validateEmail(userReg.getEmail()) == false) {
@@ -50,5 +48,6 @@ public class RegistrationService {
             userService.addUser(newUser);
             return new ResponseEntity("User registered successfully", HttpStatus.OK);
         }
+
     }
 }
