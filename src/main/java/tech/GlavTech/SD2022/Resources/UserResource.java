@@ -1,12 +1,14 @@
- package tech.GlavTech.SD2022;
+ package tech.GlavTech.SD2022.Resources;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.service.UserService;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/user")

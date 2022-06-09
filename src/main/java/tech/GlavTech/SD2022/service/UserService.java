@@ -6,6 +6,7 @@ import tech.GlavTech.SD2022.exception.UserNotFoundException;
 import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.repo.UserRepo;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+    @Transactional
     public User addUser(User user) {
         user.setUserCode(UUID.randomUUID().toString());
         return userRepo.save(user);
@@ -34,6 +36,16 @@ public class UserService {
     public User findUserById(Long id) {
         return userRepo.findUserById(id).orElseThrow(()-> new UserNotFoundException
                 ("user by id " + id + " was not found"));
+    }
+
+    public User findUserByEmail(String email) {
+        return userRepo.findUserByEmail(email).orElseThrow(()-> new UserNotFoundException
+                ("user by email " + email + " was not found"));
+    }
+
+    public User findUserByUsername(String username) {
+        return userRepo.findUserByUsername(username).orElseThrow(()-> new UserNotFoundException
+                ("user by username " + username + " was not found"));
     }
 
     public void deleteUser(Long id) {

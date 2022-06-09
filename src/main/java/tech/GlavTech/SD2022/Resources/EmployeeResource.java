@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022;
+package tech.GlavTech.SD2022.Resources;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
