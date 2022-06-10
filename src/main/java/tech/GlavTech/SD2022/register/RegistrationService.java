@@ -41,7 +41,13 @@ public class RegistrationService {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Email Not Valid");
             }
             User newUser = new User();
-            newUser.setName(userReg.getName());
+            newUser.setFirstName(userReg.getFirstName());
+            newUser.setLastName(userReg.getLastName());
+            newUser.setAddress(userReg.getAddress());
+            newUser.setCity(userReg.getCity());
+            newUser.setState(userReg.getState());
+            newUser.setZip(userReg.getZip());
+            newUser.setPhone(userReg.getPhone());
             newUser.setUsername(userReg.getUsername());
             newUser.setPassword((userReg.getPassword()));
             newUser.setEmail(userReg.getEmail());

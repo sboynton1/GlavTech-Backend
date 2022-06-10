@@ -12,10 +12,14 @@ public class User implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
     private String address;
+    private String city;
+    private String state;
+    private String zip;
     private String username;
     private String password;
 
@@ -25,16 +29,59 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(Long id, String name, String email, String phone, String address, String userCode, String username,
-                String password) {
+    public User(Long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, String userCode) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.userCode = userCode;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
         this.username = username;
         this.password = password;
+        this.userCode = userCode;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public String getUsername() {
@@ -60,14 +107,6 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -109,10 +148,14 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", userCode='" + userCode + '\'' +
