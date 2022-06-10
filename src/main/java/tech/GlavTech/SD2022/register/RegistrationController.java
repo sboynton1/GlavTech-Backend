@@ -16,7 +16,7 @@ public class RegistrationController {
 
     @PostMapping
     public ResponseEntity<String> register(@RequestBody RegistrationRequest RR){
-        System.out.println("Received Request");
+        System.out.println("Received Registration Request");
         return registrationService.register(RR);
     }
 }
