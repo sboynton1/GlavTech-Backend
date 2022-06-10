@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022.register;
+package tech.GlavTech.SD2022.Pods.register;
 
 import org.springframework.stereotype.Service;
 import java.math.BigInteger;

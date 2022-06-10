@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022.register;
+package tech.GlavTech.SD2022.Pods.register;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
