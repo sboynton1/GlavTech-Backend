@@ -16,6 +16,7 @@ import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.repo.UserRepo;
 import tech.GlavTech.SD2022.service.UserService;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -29,13 +30,15 @@ public class LoginService {
     public ResponseEntity<Object> login(LoginRequest userLogin) {
         try {
             User possibleUser = userService.findUserByUsername(userLogin.getUsername());
-            String gotPass = userLogin.getPassword();
+            String gotPass = passwordHandler.getSHA(userLogin.getPassword());
             if (!gotPass.equals(possibleUser.getPassword())) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Incorrect Password");
             }
             return ResponseEntity.status(HttpStatus.OK).body((new JSONObject().put("accessToken", "1").toString()));
         } catch (UserNotFoundException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username not found");
+        } catch (NoSuchAlgorithmException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Problem during password encryption");
         }
 
 
