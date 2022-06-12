@@ -10,7 +10,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // IDENTITY VS AUTO
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private long id;
 
     private String firstName;
     private String lastName;
