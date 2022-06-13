@@ -13,4 +13,5 @@ public interface FollowUserRepo extends JpaRepository<Follower, Integer> {
 
     //Returns list of users that are following current user
     List<Follower> findUserByWorshiperID(Integer worshiperID);
+    //Boolean existsByFollowIDs(long worshipperID, long admiredID);
 }

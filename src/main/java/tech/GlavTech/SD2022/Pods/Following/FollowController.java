@@ -13,6 +13,10 @@ import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.repo.FollowUserRepo;
 import tech.GlavTech.SD2022.repo.UserRepo;
 import tech.GlavTech.SD2022.model.Follower;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 
 @RestController
 @AllArgsConstructor
@@ -24,15 +28,33 @@ public class FollowController {
     private FollowUserRepo followUserRepo;
 
     @PostMapping(path = "/followUser")
-    public ResponseEntity<String> admireUser(User current, String admiredName){
+    @OneToOne(cascade = {CascadeType.ALL})
+    public ResponseEntity<String> admireUser(@AuthenticationPrincipal User current, @RequestBody String admiredName){
+
+
+
         long admireID = current.getId();
         User admiredUser;
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
+        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
 
         try {
             admiredUser = userRepo.findUserByUsername(admiredName).orElseThrow(Exception::new);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User not found");
         }
+
+        //If the user is already followed
+//        if(followUserRepo.existsByFollowIDs(current.getId(), admireID)) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already followed!");
+//        }
 
         long worshippedID = admiredUser.getId();
 
