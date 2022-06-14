@@ -2,69 +2,67 @@ package tech.GlavTech.SD2022.Pods.Following;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tech.GlavTech.SD2022.model.User;
-import tech.GlavTech.SD2022.repo.FollowUserRepo;
 import tech.GlavTech.SD2022.repo.UserRepo;
-import tech.GlavTech.SD2022.model.Follower;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import tech.GlavTech.SD2022.service.UserService;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/api/followhandler")
+@RequestMapping(path = "/api/followhandler", consumes = MediaType.APPLICATION_JSON_VALUE)
 public class FollowController {
-    @Autowired
+
     private UserRepo userRepo;
-    @Autowired
-    private FollowUserRepo followUserRepo;
+    private UserService userService;
+
+
+
 
     @PostMapping(path = "/followUser")
     @OneToOne(cascade = {CascadeType.ALL})
-    public ResponseEntity<String> admireUser(@AuthenticationPrincipal User current, @RequestBody String admiredName){
+    public ResponseEntity<String> admireUser(@RequestBody FollowRequest fr){
+        User current;
+        System.out.println("current user is : " + fr.getCurrentUsername());
+        System.out.println("User trying to follow is : " + fr.getAdmiredUsername());
+        try {
+            current = userRepo.findUserByUsername(fr.getCurrentUsername()).orElseThrow(Exception::new);
+            System.out.println("Current user's ID: " + current.getId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Something went wrong!");
+        }
 
-
-
-        long admireID = current.getId();
         User admiredUser;
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
-        System.out.println("THIS IS WHO I WANT OT FOLLOW: " + admiredName);
 
         try {
-            admiredUser = userRepo.findUserByUsername(admiredName).orElseThrow(Exception::new);
+            admiredUser = userRepo.findUserByUsername(fr.getAdmiredUsername()).orElseThrow(Exception::new);
+            System.out.println("Admired user's id is : " + admiredUser.getId());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User not found");
         }
 
-        //If the user is already followed
-//        if(followUserRepo.existsByFollowIDs(current.getId(), admireID)) {
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already followed!");
-//        }
+        List<String> followedList = current.getAdmiredUsers();
+        followedList.add(admiredUser.getUsername());
+        current.setAdmiredUsers(followedList);
+        userService.updateUser(current);
 
-        long worshippedID = admiredUser.getId();
+        for(int i  = 0; i < followedList.size(); i++) {
+            System.out.println(followedList.get(i));
+        }
 
-        //Saving Follower ~ Calls constructor in follower
-        Follower newAdmirer = new Follower(current, admiredUser);
-        followUserRepo.save(newAdmirer);
-        System.out.println("Followed" + admiredName + " Successfully!");
+        System.out.println("got here");
+
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-
 
 }

@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User implements Serializable {
@@ -22,6 +24,10 @@ public class User implements Serializable {
     private String zip;
     private String username;
     private String password;
+    @ElementCollection
+    private List<String> admiredUsers = new ArrayList<>();
+    @ElementCollection
+    private List<String> worshippingUsers = new ArrayList<>();
 
 
     @Column(nullable = false, updatable = false)
@@ -29,7 +35,7 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(Long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, String userCode) {
+    public User(long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, List<String> admiredUsers, List<String> worshippingUsers, String userCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +47,29 @@ public class User implements Serializable {
         this.zip = zip;
         this.username = username;
         this.password = password;
+        this.admiredUsers = admiredUsers;
+        this.worshippingUsers = worshippingUsers;
         this.userCode = userCode;
+    }
+
+    public List<String> getWorshippingUsers() {
+        return worshippingUsers;
+    }
+
+    public void setWorshippingUsers(List<String> worshippingUsers) {
+        this.worshippingUsers = worshippingUsers;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<String> getAdmiredUsers() {
+        return admiredUsers;
+    }
+
+    public void setAdmiredUsers(List<String> admiredUsers) {
+        this.admiredUsers = admiredUsers;
     }
 
     public String getFirstName() {

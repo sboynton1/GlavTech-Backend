@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.GlavTech.SD2022.model.Follower;
 import tech.GlavTech.SD2022.model.User;
-import tech.GlavTech.SD2022.repo.FollowUserRepo;
 import tech.GlavTech.SD2022.repo.UserRepo;
 
 import java.util.ArrayList;
@@ -18,59 +16,61 @@ import java.util.Optional;
 public class FollowService {
 
     @Autowired
-    private final FollowUserRepo followRepo;
-
-    @Autowired
     private final UserRepo userRepo;
 
-    public List<User> getAdmiredUsers(Integer userID){
-        List<Follower> followingObject;
-        List<User> users = new ArrayList<>();
+    public List<User> getUsersYouAdmire(String username){
+        //List<Follower> admiredUsers;
+        List<User> admiredUsers = new ArrayList<>();
+        User current;
+
+        List<User> certifiedAdmiredUsers = new ArrayList<>();
 
         try {
-            followingObject = followRepo.findUserByAdmiredID(userID);
+            admiredUsers = userRepo.findUsersByAdmiredUsers(username);
         } catch (Exception e){
-            followingObject = new ArrayList<>();
+            admiredUsers = new ArrayList<>();
         }
 
-        if(followingObject.size() > 0) {
-            for(Follower admiredUser : followingObject) {
+        if(admiredUsers.size() > 0) {
+            for(User admiredUser: admiredUsers) {
                 try {
-                    Optional<User> possibleUser = userRepo.findUserById((long)admiredUser.getWorshiperID());
+                    Optional<User> possibleUser = userRepo.findUserById(admiredUser.getId());
                     if(possibleUser.isPresent()) {
-                        users.add(possibleUser.get());
+                        certifiedAdmiredUsers.add(possibleUser.get());
                     }
                 } catch (Exception e) {
                     System.out.println("Caught exception 9876");
                 }
             }
         }
-        return users;
+        return certifiedAdmiredUsers;
     }
 
-    public List<User> getWorshippingUsers(Integer userID) {
-        List<Follower>  followingObject;
-        List<User> users = new ArrayList<>();
+    public List<User> getUsersThatFollowYou(String username) {
+        List<User>  worshippingUsers = new ArrayList<>();
+        User current;
+
+        List<User> certifiedWorshippers = new ArrayList<>();
 
         try{
-            followingObject = followRepo.findUserByWorshiperID(userID);
+            worshippingUsers = userRepo.findUsersByWorshippingUsers(username);
         } catch (Exception e) {
-            followingObject = new ArrayList<>();
+            worshippingUsers = new ArrayList<>();
         }
 
-        if(followingObject.size() > 0) {
-            for(Follower worshippingUser : followingObject) {
+        if(worshippingUsers.size() > 0) {
+            for(User worshipper: worshippingUsers) {
                 try {
-                    Optional<User> possibleUser = userRepo.findUserById((long)worshippingUser.getAdmiredID());
+                    Optional<User> possibleUser = userRepo.findUserById(worshipper.getId());
                     if(possibleUser.isPresent()) {
-                        users.add(possibleUser.get());
+                        certifiedWorshippers.add(possibleUser.get());
                     }
                 } catch (Exception e) {
                     System.out.println("Caught exception 1234");
                 }
             }
         }
-        return users;
+        return certifiedWorshippers;
     }
 
 
