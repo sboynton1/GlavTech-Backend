@@ -32,37 +32,54 @@ public class FollowController {
     @OneToOne(cascade = {CascadeType.ALL})
     public ResponseEntity<String> admireUser(@RequestBody FollowRequest fr){
         User current;
-        System.out.println("current user is : " + fr.getCurrentUsername());
-        System.out.println("User trying to follow is : " + fr.getAdmiredUsername());
         try {
             current = userRepo.findUserByUsername(fr.getCurrentUsername()).orElseThrow(Exception::new);
-            System.out.println("Current user's ID: " + current.getId());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Something went wrong!");
         }
-
         User admiredUser;
-
         try {
             admiredUser = userRepo.findUserByUsername(fr.getAdmiredUsername()).orElseThrow(Exception::new);
-            System.out.println("Admired user's id is : " + admiredUser.getId());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User not found");
         }
-
         List<String> followedList = current.getAdmiredUsers();
         followedList.add(admiredUser.getUsername());
         current.setAdmiredUsers(followedList);
         userService.updateUser(current);
 
-        for(int i  = 0; i < followedList.size(); i++) {
-            System.out.println(followedList.get(i));
-        }
-
-        System.out.println("got here");
-
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
+    @PostMapping(path = "/unfollowUser")
+    @OneToOne(cascade = {CascadeType.ALL})
+    public ResponseEntity<String> unfollowUser (@RequestBody FollowRequest fr) {
+        User current;
+        try {
+            current = userRepo.findUserByUsername(fr.getCurrentUsername()).orElseThrow(Exception::new);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Something went wrong!");
+        }
+        User admiredUser;
+        try {
+            admiredUser = userRepo.findUserByUsername(fr.getAdmiredUsername()).orElseThrow(Exception::new);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User not found");
+        }
+
+        userService.deleteFollowConnection(fr.getCurrentUsername(), fr.getAdmiredUsername());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @PostMapping(path = "/isFollowed")
+//    public ResponseEntity<Boolean> isFollowed() {
+//        try {
+//
+//        }
+//    }
+
 }
+
+
+
