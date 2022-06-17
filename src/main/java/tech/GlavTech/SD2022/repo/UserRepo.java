@@ -16,7 +16,26 @@ public interface UserRepo extends JpaRepository<User, Long> {
     Optional<User> findUserByUsername(String username);
     boolean existsByUsername(String username);
 
-    List<User> findUsersByAdmiredUsers(String username);
-    List<User> findUsersByWorshippingUsers(String username);
+    /**
+     * Matches users that are [@param] are following
+     * @param username username to match in query
+     * @return List of Users that match
+     */
+    List<User> findUsersByFollowers(String username);
+
+
+
+    /**
+     * Finds users who follow [@param]
+     * @param username username to match in query
+     * @return List of Users that match
+     */
+    List<User> findUsersByFollowing(String username);
+
+//    @Query(
+//            value = "SELECT admired_users FROM databasemanager.user_admired_users a WHERE a.user_id = ?1",
+//            nativeQuery = true
+//    )
+//    List<String> get
 
 }

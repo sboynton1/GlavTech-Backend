@@ -1,7 +1,5 @@
 package tech.GlavTech.SD2022.model;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,9 +23,9 @@ public class User implements Serializable {
     private String username;
     private String password;
     @ElementCollection
-    private List<String> admiredUsers = new ArrayList<>();
+    private List<String> following = new ArrayList<>();
     @ElementCollection
-    private List<String> worshippingUsers = new ArrayList<>();
+    private List<String> followers = new ArrayList<>();
 
 
     @Column(nullable = false, updatable = false)
@@ -35,7 +33,7 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, List<String> admiredUsers, List<String> worshippingUsers, String userCode) {
+    public User(long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, List<String> following, List<String> followers, String userCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,29 +45,29 @@ public class User implements Serializable {
         this.zip = zip;
         this.username = username;
         this.password = password;
-        this.admiredUsers = admiredUsers;
-        this.worshippingUsers = worshippingUsers;
+        this.following = following;
+        this.followers = followers;
         this.userCode = userCode;
     }
 
-    public List<String> getWorshippingUsers() {
-        return worshippingUsers;
+    public List<String> getFollowers() {
+        return followers;
     }
 
-    public void setWorshippingUsers(List<String> worshippingUsers) {
-        this.worshippingUsers = worshippingUsers;
+    public void setFollowers(List<String> worshippingUsers) {
+        this.followers = worshippingUsers;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public List<String> getAdmiredUsers() {
-        return admiredUsers;
+    public List<String> getFollowing() {
+        return following;
     }
 
-    public void setAdmiredUsers(List<String> admiredUsers) {
-        this.admiredUsers = admiredUsers;
+    public void setFollowing(List<String> admiredUsers) {
+        this.following = admiredUsers;
     }
 
     public String getFirstName() {

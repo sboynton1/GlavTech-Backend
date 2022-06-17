@@ -11,5 +11,5 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class FollowRequest {
     private String currentUsername;
-    private String admiredUsername;
+    private String targetUsername;
 }
