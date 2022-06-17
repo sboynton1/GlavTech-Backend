@@ -52,5 +52,10 @@ public class UserService {
         userRepo.deleteUserById(id);
     }
 
+    public void deleteFollowConnection(String current, String admiredUser) {
+       User cur = userRepo.findUserByUsername(current).get();
+       cur.getAdmiredUsers().remove(admiredUser);
+    }
+
 
 }
