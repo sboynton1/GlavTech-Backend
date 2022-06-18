@@ -142,7 +142,18 @@ public class FollowService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    public ResponseEntity<Boolean> isFollowing(FollowRequest fr) {
+        User sourceUser;
+        try {
+            sourceUser = userService.findUserByUsername(fr.getCurrentUsername());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(false);
+        }
 
-
+        //update source following list
+        List<String> followList = sourceUser.getFollowing();
+        boolean result = followList.contains(fr.getTargetUsername());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
 }

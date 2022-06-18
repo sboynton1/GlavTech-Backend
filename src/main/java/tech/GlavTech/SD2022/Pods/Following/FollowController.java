@@ -40,6 +40,10 @@ public class FollowController {
         return followService.unfollowUser(fr);
 
     }
+    @PostMapping(path="/isFollowing")
+    public  ResponseEntity<Boolean> isFollowing(@RequestBody FollowRequest fr) {
+        return followService.isFollowing(fr);
+    }
 
 //    @PostMapping(path = "/isFollowed")
 //    public ResponseEntity<Boolean> isFollowed() {
