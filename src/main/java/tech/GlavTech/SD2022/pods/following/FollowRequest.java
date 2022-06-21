@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022.Pods.Following;
+package tech.GlavTech.SD2022.pods.following;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

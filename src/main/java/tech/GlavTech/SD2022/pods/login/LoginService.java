@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022.Pods.login;
+package tech.GlavTech.SD2022.pods.login;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tech.GlavTech.SD2022.Pods.register.PasswordHandler;
+import tech.GlavTech.SD2022.pods.register.PasswordHandler;
 import tech.GlavTech.SD2022.service.RequestOperations;
 import tech.GlavTech.SD2022.exception.UserNotFoundException;
 import tech.GlavTech.SD2022.model.User;
@@ -15,7 +15,6 @@ import tech.GlavTech.SD2022.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 
 @Service
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package tech.GlavTech.SD2022.Pods.register;
+package tech.GlavTech.SD2022.pods.register;
 
 import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.repo.UserRepo;
