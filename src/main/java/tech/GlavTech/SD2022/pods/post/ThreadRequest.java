@@ -14,10 +14,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 public class ThreadRequest {
-    private long postID;
-    private long userID;
     private String senderUsername;
-    private String postText;
     private String postTitle;
+    private String postText;
     private String imageUrl;
 }
