@@ -1,5 +1,7 @@
 package tech.GlavTech.SD2022.model;
 
+import tech.GlavTech.SD2022.model.post.Post;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ public class User implements Serializable {
     @ElementCollection
     private List<String> followers = new ArrayList<>();
 
+    @OneToMany
+    List<Post> posts = new ArrayList<>();
 
     @Column(nullable = false, updatable = false)
     private String userCode;
