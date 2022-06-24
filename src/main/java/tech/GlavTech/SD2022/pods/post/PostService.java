@@ -12,6 +12,8 @@ import tech.GlavTech.SD2022.repo.PostRepo;
 import tech.GlavTech.SD2022.repo.UserRepo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,6 +25,18 @@ public class PostService {
 
     @Autowired
     private final UserRepo userRepo;
+
+    public List<Post> postsFromUser(long userID) {
+        List<Post> posts = new ArrayList<>();
+
+        try {
+            posts = postRepo.findPostsByUserID(userID);
+        } catch (Exception e) {
+            posts = new ArrayList<>();
+        }
+        return posts;
+    }
+
 
     public ResponseEntity<Object> postThread(ThreadRequest tr) {
         User sender;

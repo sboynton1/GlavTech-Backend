@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
-//    List<Post> findPostsBySender(User sender);
+      List<Post> findPostsByUserID(long userID);
 //
 //    List<Thread> findPostsByPostID(long id);
 
