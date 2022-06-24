@@ -57,6 +57,6 @@ public class PostService {
         newPost.setPostType((Post.PostType.THREAD));
         postRepo.save(newPost);
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>(newPost, HttpStatus.OK);
     }
 }

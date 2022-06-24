@@ -25,7 +25,7 @@ public class UserController {
         try {
             users = userService.findAllUsers();
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -49,7 +49,7 @@ public class UserController {
         try {
             user = userService.findUserById(id);
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -60,18 +60,18 @@ public class UserController {
         try {
             newUser = userService.addUser(user);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<Object> updateUser(@RequestBody User user) {
         User updatedUser = null;
         try {
             updatedUser = userService.updateUser(user);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
@@ -81,7 +81,7 @@ public class UserController {
         try {
             userService.deleteUser(id);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -26,7 +26,7 @@ public class FoodController {
         try {
             result = foodService.findFood(description);
         } catch (FoodNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Can't find food", HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
