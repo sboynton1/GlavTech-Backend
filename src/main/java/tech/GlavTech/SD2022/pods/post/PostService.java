@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tech.GlavTech.SD2022.model.post.Post;
+import tech.GlavTech.SD2022.model.post.Recipe;
 import tech.GlavTech.SD2022.model.post.Thread;
 import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.repo.PostRepo;
@@ -58,5 +59,28 @@ public class PostService {
         postRepo.save(newPost);
 
         return new ResponseEntity<>(newPost, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> postRecipe(RecipeRequest rr) {
+        User sender;
+
+        //Verifies Sender is a real user
+        try {
+            sender = userRepo.findUserByUsername(rr.getSenderUsername()).orElseThrow(Exception::new);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User Not Found!");
+        }
+        Recipe newPost = new Recipe();
+        newPost.setUserID(sender.getId());
+        newPost.setPostText(rr.getPostText());
+        newPost.setPostTitle(rr.getPostTitle());
+        newPost.setSentAtTime(LocalDate.now());
+        newPost.setImageUrl(rr.getImageUrl());
+        newPost.setInstructions(rr.getInstructions());
+        newPost.setPostType((Post.PostType.RECIPE));
+        postRepo.save(newPost);
+
+        return new ResponseEntity<>(newPost, HttpStatus.OK);
+
     }
 }

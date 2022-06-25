@@ -39,4 +39,7 @@ public class PostController {
         }
     }
 
+    @PostMapping(path = "/recipe")
+    public ResponseEntity<Object> postRecipe(@RequestBody RecipeRequest rr) {return postService.postRecipe(rr);}
+
 }

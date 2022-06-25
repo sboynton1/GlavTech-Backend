@@ -32,7 +32,7 @@ public class LoginService {
             User possibleUser = userService.findUserByUsername(userLogin.getUsername());
             String gotPass = passwordHandler.getSHA(userLogin.getPassword());
             if (!gotPass.equals(possibleUser.getPassword())) {
-                System.out.println("Incorr Pass");
+                System.out.println("Incorrect Password");
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Incorrect Password");
             }
             //save session if session is not present
