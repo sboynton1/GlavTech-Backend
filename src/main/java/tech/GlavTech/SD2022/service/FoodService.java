@@ -16,8 +16,7 @@ public class FoodService {
     private FoodService(FoodRepo foodRepo) {this.foodRepo = foodRepo;}
 
     public Food findFood(String description) {
-        Food result = foodRepo.findFirstByDescription(description).orElseThrow(()-> new FoodNotFoundException("Food with that name not found"));
-
+        Food result = foodRepo.findFirstByDescription(description).orElseThrow(()-> new FoodNotFoundException("Food with decription [" +description+ "] not found"));
         //increment search frequency and update db
         result.incrementSF();
         foodRepo.save(result);
