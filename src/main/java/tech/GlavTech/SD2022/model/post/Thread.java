@@ -12,8 +12,8 @@ public class Thread extends Post{
 
     public Thread() {}
 
-    public Thread(long postID, long userId, String postText, String postTitle, LocalDate sentAtTime, PostType postType, String imageUrl) {
-        super(postID, userId, postText, postTitle, sentAtTime, postType);
+    public Thread(long postID, long userId, String username, String postText, String postTitle, LocalDate sentAtTime, PostType postType, String imageUrl) {
+        super(postID, userId, username, postText, postTitle, sentAtTime, postType);
         this.imageUrl = imageUrl;
     }
 

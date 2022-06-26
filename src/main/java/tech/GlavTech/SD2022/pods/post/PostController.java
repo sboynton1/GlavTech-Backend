@@ -2,8 +2,10 @@ package tech.GlavTech.SD2022.pods.post;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.GlavTech.SD2022.exception.UserNotFoundException;
 import tech.GlavTech.SD2022.model.User;
 import tech.GlavTech.SD2022.model.post.Post;
 import tech.GlavTech.SD2022.repo.PostRepo;
@@ -41,5 +43,16 @@ public class PostController {
 
     @PostMapping(path = "/recipe")
     public ResponseEntity<Object> postRecipe(@RequestBody RecipeRequest rr) {return postService.postRecipe(rr);}
+
+    @GetMapping(path = "/feed/{username}")
+    public ResponseEntity<Object> getFeed(@PathVariable String username) {
+        List<Post> feed;
+        try {
+            feed = postService.getFeed(username);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(feed, HttpStatus.OK);
+    }
 
 }

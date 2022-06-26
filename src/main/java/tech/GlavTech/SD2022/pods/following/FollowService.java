@@ -26,7 +26,13 @@ public class FollowService {
 
     public List<User> getFollowers(String username) {
         //Throws UserNotFound Exception if fails
-        User sourceUser = userService.findUserByUsername(username);
+        User sourceUser;
+        try {
+            sourceUser = userService.findUserByUsername(username);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("Could not find user [" + username +"]");
+        }
+
         List<User> followList = new ArrayList<>();
 
         //grab every user in follow list
@@ -46,7 +52,12 @@ public class FollowService {
 
     public List<User> getFollowing(String username) {
         //Throws UserNotFound Exception if fails
-        User sourceUser = userService.findUserByUsername(username);
+        User sourceUser;
+        try {
+            sourceUser = userService.findUserByUsername(username);
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException("Could not find user [" + username +"]");
+        }
         List<User> followList = new ArrayList<>();
 
         //grab every user in follow list

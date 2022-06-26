@@ -15,10 +15,20 @@ public class Post {
 
     private long userID;
 
+    private String username;
+
     private String postText;
     private String postTitle;
 
     private LocalDate sentAtTime;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public enum PostType {
         THREAD(0), RECIPE(1), RESTAURANT_REVIEW(2);
@@ -33,9 +43,10 @@ public class Post {
 
     public Post() {}
 
-    public Post(long postID, long userId, String postText, String postTitle, LocalDate sentAtTime, PostType postType) {
+    public Post(long postID, long userId, String username, String postText, String postTitle, LocalDate sentAtTime, PostType postType) {
         this.postID = postID;
-        this.userID = userID;
+        this.userID = userId;
+        this.username = username;
         this.postText = postText;
         this.postTitle = postTitle;
         this.sentAtTime = sentAtTime;
