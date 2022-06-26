@@ -16,6 +16,7 @@ import tech.GlavTech.SD2022.repo.UserRepo;
 import tech.GlavTech.SD2022.service.UserService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -63,7 +64,7 @@ public class PostService {
         newPost.setUsername(sender.getUsername());
         newPost.setPostText(tr.getPostText());
         newPost.setPostTitle(tr.getPostTitle());
-        newPost.setSentAtTime(LocalDate.now());
+        newPost.setSentAtTime(LocalDateTime.now());
         newPost.setImageUrl(tr.getImageUrl());
         newPost.setPostType((Post.PostType.THREAD));
         postRepo.save(newPost);
@@ -85,7 +86,7 @@ public class PostService {
         newPost.setUsername(sender.getUsername());
         newPost.setPostText(rr.getPostText());
         newPost.setPostTitle(rr.getPostTitle());
-        newPost.setSentAtTime(LocalDate.now());
+        newPost.setSentAtTime(LocalDateTime.now());
         newPost.setImageUrl(rr.getImageUrl());
         newPost.setInstructions(rr.getInstructions());
         newPost.setPostType((Post.PostType.RECIPE));

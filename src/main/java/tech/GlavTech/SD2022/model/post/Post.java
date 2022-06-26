@@ -4,6 +4,7 @@ import tech.GlavTech.SD2022.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,7 +21,7 @@ public class Post {
     private String postText;
     private String postTitle;
 
-    private LocalDate sentAtTime;
+    private LocalDateTime sentAtTime;
 
     public String getUsername() {
         return username;
@@ -43,7 +44,7 @@ public class Post {
 
     public Post() {}
 
-    public Post(long postID, long userId, String username, String postText, String postTitle, LocalDate sentAtTime, PostType postType) {
+    public Post(long postID, long userId, String username, String postText, String postTitle, LocalDateTime sentAtTime, PostType postType) {
         this.postID = postID;
         this.userID = userId;
         this.username = username;
@@ -86,11 +87,11 @@ public class Post {
         this.postTitle = postTitle;
     }
 
-    public LocalDate getSentAtTime() {
+    public LocalDateTime getSentAtTime() {
         return sentAtTime;
     }
 
-    public void setSentAtTime(LocalDate sentAtTime) {
+    public void setSentAtTime(LocalDateTime sentAtTime) {
         this.sentAtTime = sentAtTime;
     }
 

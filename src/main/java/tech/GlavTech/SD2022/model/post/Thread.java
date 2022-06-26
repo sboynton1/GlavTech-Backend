@@ -5,6 +5,7 @@ import tech.GlavTech.SD2022.model.User;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Thread extends Post{
@@ -12,7 +13,7 @@ public class Thread extends Post{
 
     public Thread() {}
 
-    public Thread(long postID, long userId, String username, String postText, String postTitle, LocalDate sentAtTime, PostType postType, String imageUrl) {
+    public Thread(long postID, long userId, String username, String postText, String postTitle, LocalDateTime sentAtTime, PostType postType, String imageUrl) {
         super(postID, userId, username, postText, postTitle, sentAtTime, postType);
         this.imageUrl = imageUrl;
     }

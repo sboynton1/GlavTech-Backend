@@ -7,6 +7,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Recipe extends Post{
 
     public Recipe () {}
 
-    public Recipe(long postID, long userId, String username, String postText, String postTitle, LocalDate sentAtTime, PostType postType, String imageUrl, List<Instruction> instructions) {
+    public Recipe(long postID, long userId, String username, String postText, String postTitle, LocalDateTime sentAtTime, PostType postType, String imageUrl, List<Instruction> instructions) {
         super(postID, userId, username, postText, postTitle, sentAtTime, postType);
         this.imageUrl = imageUrl;
         this.instructions = instructions;
