@@ -15,12 +15,12 @@ public class Recipe extends Post{
 
     private String imageUrl;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<Instruction> instructions;
+    @ElementCollection
+    private List<String> instructions;
 
     public Recipe () {}
 
-    public Recipe(long postID, long userId, String username, String postText, String postTitle, LocalDateTime sentAtTime, PostType postType, String imageUrl, List<Instruction> instructions) {
+    public Recipe(long postID, long userId, String username, String postText, String postTitle, LocalDateTime sentAtTime, PostType postType, String imageUrl, List<String> instructions) {
         super(postID, userId, username, postText, postTitle, sentAtTime, postType);
         this.imageUrl = imageUrl;
         this.instructions = instructions;
@@ -34,11 +34,11 @@ public class Recipe extends Post{
         this.imageUrl = imageUrl;
     }
 
-    public List<Instruction> getInstructions() {
+    public List<String> getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(List<Instruction> instructions) {
+    public void setInstructions(List<String> instructions) {
         this.instructions = instructions;
     }
 }

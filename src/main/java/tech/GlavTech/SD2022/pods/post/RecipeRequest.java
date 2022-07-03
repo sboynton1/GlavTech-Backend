@@ -17,6 +17,6 @@ public class RecipeRequest {
     private String postTitle;
     private String postText;
     private String imageUrl;
-    private List<Instruction> instructions;
+    private List<String> instructions;
 
 }
