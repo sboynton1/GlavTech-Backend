@@ -50,6 +50,7 @@ public class RegistrationService {
             newUser.setZip(userReg.getZip());
             newUser.setPhone(userReg.getPhone());
             newUser.setUsername(userReg.getUsername());
+            newUser.setAdmin(false);
 
             //Password Encryption
             String pass = "";

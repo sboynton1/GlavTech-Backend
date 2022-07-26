@@ -11,5 +11,7 @@ import java.util.List;
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
       List<Post> findPostsByUserID(long userID);
+      Post findPostsByPostID(long postID);
+      void deletePostByPostID(long postID);
 
 }

@@ -29,6 +29,8 @@ public class User implements Serializable {
     @ElementCollection
     private List<String> followers = new ArrayList<>();
 
+    private Boolean isAdmin;
+
     @OneToMany
     List<Post> posts = new ArrayList<>();
 
@@ -37,7 +39,8 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, List<String> following, List<String> followers, String userCode) {
+    public User(long id, String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, String username, String password, List<String> following,
+                List<String> followers, String userCode, Boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,6 +55,7 @@ public class User implements Serializable {
         this.following = following;
         this.followers = followers;
         this.userCode = userCode;
+        this.isAdmin = isAdmin;
     }
 
     public List<String> getFollowers() {
@@ -164,7 +168,13 @@ public class User implements Serializable {
         this.address = address;
     }
 
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
 
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
 
     public String getUserCode() {
         return userCode;

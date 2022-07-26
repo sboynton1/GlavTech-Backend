@@ -55,4 +55,19 @@ public class PostController {
         return new ResponseEntity<>(feed, HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/delete/{postID}")
+    public ResponseEntity<Object> deletePost(@PathVariable long postID) throws Exception{
+        Post postToDelete;
+        try {
+            postToDelete = postRepo.findPostsByPostID(postID);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+
+        postService.deletePost(postID);
+
+        return new ResponseEntity<>(postToDelete, HttpStatus.OK);
+    }
+
+
 }

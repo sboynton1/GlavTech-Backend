@@ -15,6 +15,7 @@ import tech.GlavTech.SD2022.repo.PostRepo;
 import tech.GlavTech.SD2022.repo.UserRepo;
 import tech.GlavTech.SD2022.service.UserService;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -133,5 +134,15 @@ public class PostService {
             }
         }
         return postList;
+    }
+
+    @Transactional
+    public void deletePost(long postID) throws Exception {
+        try {
+            postRepo.deletePostByPostID(postID);
+        } catch (Exception e) {
+            throw new Exception("Can't Delete Post");
+        }
+        System.out.println("Deleting Post.....");
     }
 }
